@@ -6,5 +6,9 @@ package com.googlecode.torcontrol;
  * 
  */
 public class TorControl {
-	// TODO
+	/**
+	 * 
+	 */
+	public TorControl() {
+	}
 }

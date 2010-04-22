@@ -1,6 +1,7 @@
 package com.googlecode.torcontrol.command;
 
-import static com.googlecode.torcontrol.TorTokens.*;
+import static com.googlecode.torcontrol.TorTokens.CRLF;
+import static com.googlecode.torcontrol.TorTokens.SP;
 
 /**
  * Sent from the client to the server.
