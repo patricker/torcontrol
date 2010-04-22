@@ -1,9 +1,7 @@
 package com.googlecode.torcontrol.command;
 
 /**
- * Remove all settings for a given configuration option entirely, assign its
- * default value (if any), and then assign the String provided. Typically the
- * String is left empty, to simply set an option back to its default
+ * TODO
  * 
  * @author Denis Migol
  * 

@@ -64,6 +64,34 @@ public class TorSignal extends TorCommandBase {
 	 */
 	public static final String CLEARDNSCACHE = "CLEARDNSCACHE";
 
+	public static final TorSignal newReload() {
+		return new TorSignal(RELOAD);
+	}
+
+	public static final TorSignal newShutdown() {
+		return new TorSignal(SHUTDOWN);
+	}
+
+	public static final TorSignal newDump() {
+		return new TorSignal(DUMP);
+	}
+
+	public static final TorSignal newDebug() {
+		return new TorSignal(DEBUG);
+	}
+
+	public static final TorSignal newHalt() {
+		return new TorSignal(HALT);
+	}
+
+	public static final TorSignal newClearDNSCache() {
+		return new TorSignal(CLEARDNSCACHE);
+	}
+
+	public static final TorSignal newNewNym() {
+		return new TorSignal(NEWNYM);
+	}
+
 	/* properties */
 
 	private final String signal;
