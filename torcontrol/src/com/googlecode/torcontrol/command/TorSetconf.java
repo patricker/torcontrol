@@ -1,12 +1,14 @@
 package com.googlecode.torcontrol.command;
 
 /**
- * SETCONF Change the value of one or more configuration variables.
+ * TODO
  * 
  * @author Denis Migol
  * 
  */
 public class TorSetconf extends TorCommandBase {
+
+	// TODO
 
 	public static final String KEYWORD = "SETCONF";
 
