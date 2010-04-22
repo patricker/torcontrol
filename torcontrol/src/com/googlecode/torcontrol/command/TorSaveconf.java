@@ -1,5 +1,7 @@
 package com.googlecode.torcontrol.command;
 
+import static com.googlecode.torcontrol.TorTokens.CRLF;
+
 /**
  * Instructs the server to write out its config options into its torrc. Server
  * returns "250 OK" if successful, or "551 Unable to write configuration to
@@ -16,8 +18,16 @@ public class TorSaveconf extends TorCommandBase {
 
 	public static final String KEYWORD = "SAVECONF";
 
+	/**
+	 * 
+	 */
 	public TorSaveconf() {
 		super(KEYWORD);
+	}
+
+	@Override
+	public String toString() {
+		return KEYWORD + CRLF;
 	}
 
 }
