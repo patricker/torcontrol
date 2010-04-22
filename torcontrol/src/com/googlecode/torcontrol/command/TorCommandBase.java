@@ -23,4 +23,9 @@ public abstract class TorCommandBase {
 	public String getKeyword() {
 		return Keyword;
 	}
+
+	@Override
+	public String toString() {
+		throw new UnsupportedOperationException("Not implemented yet");
+	}
 }
