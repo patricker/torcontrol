@@ -8,7 +8,9 @@ import java.io.Writer;
 import java.net.Socket;
 import java.net.UnknownHostException;
 
+import com.googlecode.torcontrol.command.TorAuthenticate;
 import com.googlecode.torcontrol.command.TorCommandBase;
+import com.googlecode.torcontrol.command.TorGetinfo;
 
 /**
  * 
@@ -60,7 +62,7 @@ public class TorControl {
 	 * @param response
 	 * @return
 	 */
-	public static final int parseCode(final String response) {
+	private static final int parseCode(final String response) {
 		return Integer.parseInt(response.split(" ", 2)[0]);
 	}
 
@@ -79,7 +81,7 @@ public class TorControl {
 
 		final StringBuilder ret = new StringBuilder();
 		String line = null;
-		while ((line = in.readLine()) != null) {
+		if ((line = in.readLine()) != null) {
 			ret.append(line + TorTokens.CRLF);
 		}
 		final int index = ret.lastIndexOf(TorTokens.CRLF);
@@ -131,5 +133,20 @@ public class TorControl {
 	 */
 	public String getAuthCode() {
 		return authCode;
+	}
+	
+	public static void main(String[] args) throws UnknownHostException, IOException {
+		final TorControl torControl = new TorControl();
+		
+		String response = torControl.executeCommand(new TorAuthenticate());
+		System.out.println(parseCode(response));
+		System.out.println(response);
+		
+		TorGetinfo getinfo = new TorGetinfo();
+		getinfo.setProperty(TorGetinfo.ADDRESS);
+		response = torControl.executeCommand(getinfo);
+		System.out.println(parseCode(response));
+		System.out.println(response);
+
 	}
 }
