@@ -1,6 +1,10 @@
 package com.googlecode.torcontrol;
 
+import java.io.BufferedReader;
 import java.io.IOException;
+import java.io.InputStreamReader;
+import java.io.OutputStreamWriter;
+import java.io.Writer;
 import java.net.Socket;
 import java.net.UnknownHostException;
 
@@ -21,6 +25,8 @@ public class TorControl {
 	private String authCode = null;
 
 	private Socket socket = null;
+	private Writer out = null;
+	private BufferedReader in = null;
 
 	/**
 	 * 
@@ -40,17 +46,46 @@ public class TorControl {
 		this.controlPort = controlPort;
 		this.authCode = authCode;
 	}
-	
-	private void socketConnect() throws UnknownHostException, IOException {
+
+	public void connect() throws UnknownHostException, IOException {
 		if (socket == null) {
 			socket = new Socket(controlHost, controlPort);
+			out = new OutputStreamWriter(socket.getOutputStream());
+			in = new BufferedReader(new InputStreamReader(socket.getInputStream()));
 		}
 	}
 
+	/**
+	 * 
+	 * @param response
+	 * @return
+	 */
+	public static final int parseCode(final String response) {
+		return Integer.parseInt(response.split(" ", 2)[0]);
+	}
+
+	/**
+	 * 
+	 * @param command
+	 * @return
+	 * @throws UnknownHostException
+	 * @throws IOException
+	 */
 	public String executeCommand(final TorCommandBase command) throws UnknownHostException, IOException {
-		// TODO
-		socketConnect();
-		return null;
+		connect();
+
+		out.write(command.toString());
+		out.flush();
+
+		final StringBuilder ret = new StringBuilder();
+		String line = null;
+		while ((line = in.readLine()) != null) {
+			ret.append(line + TorTokens.CRLF);
+		}
+		final int index = ret.lastIndexOf(TorTokens.CRLF);
+		ret.delete(index, index + TorTokens.CRLF.length());
+
+		return ret.toString();
 	}
 
 	/**
