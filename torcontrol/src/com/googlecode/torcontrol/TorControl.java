@@ -1,5 +1,11 @@
 package com.googlecode.torcontrol;
 
+import java.io.IOException;
+import java.net.Socket;
+import java.net.UnknownHostException;
+
+import com.googlecode.torcontrol.command.TorCommandBase;
+
 /**
  * 
  * @author Denis Migol
@@ -14,10 +20,13 @@ public class TorControl {
 	private int controlPort = DEFAULT_CONTROL_PORT;
 	private String authCode = null;
 
+	private Socket socket = null;
+
 	/**
 	 * 
 	 */
 	public TorControl() {
+		this(DEFAULT_CONTROL_HOST, DEFAULT_CONTROL_PORT, null);
 	}
 
 	/**
@@ -27,10 +36,21 @@ public class TorControl {
 	 * @param authCode
 	 */
 	public TorControl(String controlHost, int controlPort, String authCode) {
-		super();
 		this.controlHost = controlHost;
 		this.controlPort = controlPort;
 		this.authCode = authCode;
+	}
+	
+	private void socketConnect() throws UnknownHostException, IOException {
+		if (socket == null) {
+			socket = new Socket(controlHost, controlPort);
+		}
+	}
+
+	public String executeCommand(final TorCommandBase command) throws UnknownHostException, IOException {
+		// TODO
+		socketConnect();
+		return null;
 	}
 
 	/**
