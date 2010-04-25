@@ -34,7 +34,7 @@ public class TorAuthenticate extends TorCommandBase {
 
 	public static final String KEYWORD = "AUTHENTICATE";
 
-	private final String code;
+	private String code;
 
 	/**
 	 * 
@@ -53,6 +53,14 @@ public class TorAuthenticate extends TorCommandBase {
 	}
 
 	/**
+	 * @param code
+	 *            the code to set
+	 */
+	public void setCode(final String code) {
+		this.code = code;
+	}
+
+	/**
 	 * @return the code
 	 */
 	public String getCode() {
@@ -61,7 +69,8 @@ public class TorAuthenticate extends TorCommandBase {
 
 	@Override
 	public String toString() {
+		final String code = this.getCode();
 		// "AUTHENTICATE" [ SP 1*HEXDIG / QuotedString ] CRLF
-		return KEYWORD + SP + (getCode() == null || getCode().length() == 0 ? "" : getCode()) + CRLF;
+		return KEYWORD + SP + (code == null || code.length() == 0 ? "" : code) + CRLF;
 	}
 }
