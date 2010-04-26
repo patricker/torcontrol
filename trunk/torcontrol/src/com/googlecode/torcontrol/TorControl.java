@@ -64,7 +64,7 @@ public class TorControl {
 		return Integer.parseInt(response.split(" ", 2)[0]);
 	}
 
-	private String getResponse() throws IOException {
+	private static String getResponse(final BufferedReader in) throws IOException {
 		final StringBuilder ret = new StringBuilder();
 		String line = null;
 		boolean isExit = false;
@@ -96,7 +96,7 @@ public class TorControl {
 		out.write(command.toString());
 		out.flush();
 
-		return getResponse();
+		return getResponse(in);
 	}
 
 	/**
