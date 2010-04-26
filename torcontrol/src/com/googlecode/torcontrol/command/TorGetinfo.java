@@ -20,6 +20,7 @@ public class TorGetinfo extends TorCommandBase {
 	//
 
 	public static final String ADDRESS = "address";
+	public static final String IP_TO_COUNTRY = "ip-to-country";
 
 	private Properties properties;
 
